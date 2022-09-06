@@ -29,6 +29,9 @@ h1 {
     align-items: center;
     padding-left: 45px;
 }
+img{
+  max-height: 75px;
+}
 
 .nav-bar .nav-links{
   flex: 50%;
@@ -39,7 +42,7 @@ h1 {
 }
 
 .nav-bar .nav-links .links{
-  max-height: 80px;
+  max-height: 90px;
   text-decoration: none;
   color: #fff;
   font-size: 20px;

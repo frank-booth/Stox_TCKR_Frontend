@@ -1,8 +1,10 @@
 import { NavLink } from 'react-router-dom'
+import StokIcon from '../assets/Stok.png'
 
 const Nav = () => {
   return (
     <div className="nav-bar">
+      <img src={StokIcon} />
       <div className="nav-links">
         <NavLink className="links" to="/">
           Home
