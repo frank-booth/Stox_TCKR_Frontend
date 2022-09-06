@@ -1,9 +1,7 @@
 const Home = () => {
   return (
     <div>
-      <section className="page-home">
-        <h1>Hello</h1>
-      </section>
+      <h1>Hello</h1>
     </div>
   )
 }
