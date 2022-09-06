@@ -1,4 +1,5 @@
 import './App.css'
+import { BASE_URL } from './globals'
 import { Routes, Route } from 'react-router-dom'
 import axios from 'axios'
 import Nav from './components/Nav'
