@@ -2,10 +2,43 @@
 h1 {
   color:blue;
 }
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.nav-bar{
+  background: blue;
+    display: flex;
+    height: 40px;
+    flex: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 45px;
 }
+
+.nav-bar .nav-links{
+  flex: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 45px;
+}
+
+.nav-bar .nav-links .links{
+  max-height: 80px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 20px;
+  margin-left: 15px;
+  padding: 10px 10px;
+}
+
+
+.links:hover{
+  background-color:rgb(57, 57, 197);
+  padding: 10px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  }
+
 
 .page-home{
   background-image:url(./assets/stocks.jpeg);
