@@ -1,9 +1,12 @@
+import { Image } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom'
+import StokIcon from '../assets/Stok.png'
 
 const Home = () => {
   return (
-    <div>
-      <h1>Hello</h1>
+    <div className="home-page">
+      <Image className="home-image" src={StokIcon} size="huge" centered />
+
       <NavLink className="home-links" to="/login">
         Login
       </NavLink>

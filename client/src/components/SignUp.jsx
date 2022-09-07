@@ -26,11 +26,10 @@ const SignUp = () => {
   }
   return (
     <div className="main-container">
-      <h1>Sign Up</h1>
       <div className="form-container-signup">
         <Segment placeholder padded="very">
           <Grid relaxed="very" stackable>
-            <Grid.Column width={18}>
+            <Grid.Column>
               <Form onSubmit={handleSubmit}>
                 <Form.Input
                   label="First Name"

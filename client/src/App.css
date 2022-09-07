@@ -29,6 +29,7 @@ body {
   align-items: center;
   padding: 32px 40px;
   margin:0 auto;
+  margin-top:60px;
   gap: 24px;
   width: 600px;
   min-height: 150px;
@@ -52,7 +53,7 @@ h1 {
     align-items: center;
     padding-left: 45px;
 }
-img{
+.nav-bar-image{
   max-height: 75px;
 }
 
@@ -82,3 +83,6 @@ img{
   cursor: pointer;
   }
 
+  .home-image{
+    backdrop-filter: blur(5px)
+  }

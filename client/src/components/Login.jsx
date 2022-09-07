@@ -1,4 +1,4 @@
-import { Button, Divider, Form, Grid, Segment, Input } from 'semantic-ui-react'
+import { Button, Divider, Form, Grid, Segment } from 'semantic-ui-react'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {

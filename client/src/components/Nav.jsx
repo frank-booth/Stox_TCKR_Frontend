@@ -1,10 +1,15 @@
-import { NavLink } from 'react-router-dom'
+import { useNavigate, NavLink } from 'react-router-dom'
 import StokIcon from '../assets/Stok.png'
 
 const Nav = () => {
+  let navigate = useNavigate()
+  const handleClick = () => {
+    navigate('/')
+  }
+
   return (
     <div className="nav-bar">
-      <img src={StokIcon} />
+      <img className="nav-bar-image" src={StokIcon} onClick={handleClick} />
       <div className="nav-links">
         <NavLink className="links" to="/">
           Home
