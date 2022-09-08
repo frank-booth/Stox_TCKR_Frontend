@@ -96,10 +96,12 @@ h1 {
     font-size:18px
   }
 
-  .portfolio-header{
+  .portfolio-header, .add-stock-header{
     padding:20px;
     
   }
+
+
 
 
   

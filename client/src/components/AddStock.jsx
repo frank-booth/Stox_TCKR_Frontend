@@ -1,4 +1,4 @@
-import { Button, Form, Segment, Grid } from 'semantic-ui-react'
+import { Button, Form, Segment, Grid, Header, Icon } from 'semantic-ui-react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { BASE_URL } from '../globals'
 import { useState } from 'react'
@@ -29,7 +29,12 @@ const AddStock = () => {
   }
   return (
     <div>
-      <h1>Add Stock</h1>
+      <div className="add-stock-header">
+        <Header as="h2" color="violet" icon>
+          <Icon name="tasks" />
+          Add Stock To Your Portfolio
+        </Header>
+      </div>
       <div className="main-container">
         <div className="form-container-signup">
           <Segment placeholder padded="very">

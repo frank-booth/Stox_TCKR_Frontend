@@ -77,7 +77,7 @@ const Portfolio = ({ stocks, apiKey }) => {
             ))}
           </Table.Body>
         </Table>
-        <Button primary onClick={addStock}>
+        <Button color="violet" onClick={addStock}>
           Add Stock
         </Button>
       </div>
