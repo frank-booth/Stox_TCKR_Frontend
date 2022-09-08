@@ -52,10 +52,10 @@ const Portfolio = ({ stocks, apiKey }) => {
             <Table.Row>
               <Table.HeaderCell>Symbol</Table.HeaderCell>
               <Table.HeaderCell>Cost Basis</Table.HeaderCell>
-              <Table.HeaderCell>Shares Quantity</Table.HeaderCell>
+              <Table.HeaderCell>Share Quantity</Table.HeaderCell>
               <Table.HeaderCell>Previous Day Close</Table.HeaderCell>
               <Table.HeaderCell>Current Value</Table.HeaderCell>
-              <Table.HeaderCell>Note</Table.HeaderCell>
+              <Table.HeaderCell>Action</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
