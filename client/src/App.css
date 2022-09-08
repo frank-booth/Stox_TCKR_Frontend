@@ -79,6 +79,7 @@ h1 {
 
 .links:hover{
   background-color:rgb(57, 57, 197);
+
   padding: 10px 10px;
   border-radius: 5px;
   cursor: pointer;
@@ -87,3 +88,23 @@ h1 {
   .home-image{
     backdrop-filter: blur(5px)
   }
+
+  .table-container {
+    margin:0 auto;
+    margin-top: 60px;
+    max-width:800px;
+    font-size:18px
+  }
+
+  .portfolio-header{
+    padding:20px;
+    
+  }
+  .header{
+    font-weight: 800;
+  }
+
+  .ui violet header{
+    font-weight:bolder
+  }
+  

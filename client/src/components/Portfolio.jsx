@@ -1,4 +1,4 @@
-import { Table } from 'semantic-ui-react'
+import { Table, Header, Icon } from 'semantic-ui-react'
 import { BASE_URL_MS } from '../globals'
 import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
@@ -14,21 +14,36 @@ const Portfolio = ({ stocks, apiKey }) => {
   let user = location.state.user
   let userStocks = stocks?.filter((stock) => stock.userId === user.id)
 
-  const stockDataInfo = async (sym, quan) => {
-    let res = await axios.get(
-      `${BASE_URL_MS}eod?access_key=${apiKey}&symbols=${sym}`
-    )
-    console.log(res.data)
+  const editStock = (stock) => {
+    navigate(`/users/${user.id}/editstock`, { state: { stock: stock } })
   }
-  //   useEffect(() => {
-  //     stockDataInfo('AMZN', 250)
-  //   }, [])
+  // const stockDataInfo = async (sym, quan) => {
+  //   let res = await axios.get(
+  //     `https://api.marketstack.com/v1/eod?access_key=6fbf9e69e7289f1826a1e67850102e4c$symbols=AAPL`
+  //   )
+  //   console.log(res.data)
+  // }
+  // useEffect(() => {
+  //   stockDataInfo('AMZN', 250)
+  // }, [])
+
+  const test = (qty) => {
+    currentValue = qty * 24
+    return currentValue
+  }
 
   return (
     <div>
-      <h2>{user.username}'s Portfolio</h2>
-      <div>
-        <Table celled selectable>
+      <div className="portfolio-header">
+        <Header color="violet" size="huge">
+          <Icon name="chart line" />
+          <Header.Content className="header">
+            {user.username}'s Portfolio
+          </Header.Content>
+        </Header>
+      </div>
+      <div className="table-container">
+        <Table celled color="grey" inverted>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Symbol</Table.HeaderCell>
@@ -36,6 +51,7 @@ const Portfolio = ({ stocks, apiKey }) => {
               <Table.HeaderCell>Shares Quantity</Table.HeaderCell>
               <Table.HeaderCell>Previous Day Close</Table.HeaderCell>
               <Table.HeaderCell>Current Value</Table.HeaderCell>
+              <Table.HeaderCell>Note</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
@@ -44,6 +60,15 @@ const Portfolio = ({ stocks, apiKey }) => {
                 <Table.Cell>{stock.symbol}</Table.Cell>
                 <Table.Cell>{stock.costBasis}</Table.Cell>
                 <Table.Cell>{stock.quantity}</Table.Cell>
+                <Table.Cell>{test(stock.quantity)}</Table.Cell>
+                <Table.Cell>{currentValue}</Table.Cell>
+                <Table.Cell
+                  selectable
+                  textAlign="center"
+                  onClick={() => editStock(stock)}
+                >
+                  Edit
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>

@@ -11,6 +11,7 @@ import News from './pages/News'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
 import Portfolio from './components/Portfolio'
+import EditStock from './components/EditStock'
 
 function App() {
   const API_KEY = process.env.REACT_APP_ALPHA_KEY
@@ -70,6 +71,7 @@ function App() {
             path="/users/:userId"
             element={<Portfolio stocks={stocks} apiKey={API_KEY_MS} />}
           />
+          <Route path="/users/:userId/editStock" element={<EditStock />} />
         </Routes>
       </main>
     </div>
