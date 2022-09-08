@@ -14,7 +14,9 @@ import Portfolio from './components/Portfolio'
 
 function App() {
   const API_KEY = process.env.REACT_APP_ALPHA_KEY
+  const API_KEYMS = process.env.MARKET_STACK_KEY
 
+  console.log(API_KEYMS)
   const [users, setUsers] = useState()
   const [stocks, setStocks] = useState()
   const [cpiData, setCpiData] = useState()
@@ -39,13 +41,13 @@ function App() {
     getAllStocks()
   }, [])
 
-  const getCpiData = async () => {
-    let res = await axios.get(
-      `https://www.alphavantage.co/query?function=CPI&interval=monthly&apikey=${API_KEY}`
-    )
-    console.log(res.data)
-    setCpiData(res.data)
-  }
+  // const getCpiData = async () => {
+  //   let res = await axios.get(
+  //     `https://www.alphavantage.co/query?function=CPI&interval=monthly&apikey=${API_KEY}`
+  //   )
+  //   console.log(res.data)
+  //   setCpiData(res.data)
+  // }
 
   //  useEffect(() => {
   //     getCpiData()
@@ -66,7 +68,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route
             path="/users/:userId"
-            element={<Portfolio stocks={stocks} />}
+            element={<Portfolio stocks={stocks} apiKey={API_KEYMS} />}
           />
         </Routes>
       </main>
