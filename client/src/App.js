@@ -10,11 +10,13 @@ import EconomicData from './pages/EconomicData'
 import News from './pages/News'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
+import Portfolio from './components/Portfolio'
 
 function App() {
   const API_KEY = process.env.REACT_APP_ALPHA_KEY
 
   const [users, setUsers] = useState()
+  const [stocks, setStocks] = useState()
   const [cpiData, setCpiData] = useState()
 
   const getAllUsers = async () => {
@@ -23,9 +25,19 @@ function App() {
     setUsers(res.data)
   }
 
-  // useEffect(() => {
-  //   getAllUsers()
-  // }, [])
+  useEffect(() => {
+    getAllUsers()
+  }, [])
+
+  const getAllStocks = async () => {
+    let res = await axios.get(`${BASE_URL}/stocks`)
+    console.log(res.data)
+    setStocks(res.data)
+  }
+
+  useEffect(() => {
+    getAllStocks()
+  }, [])
 
   const getCpiData = async () => {
     let res = await axios.get(
@@ -52,6 +64,10 @@ function App() {
           <Route path="/news" element={<News />} />
           <Route path="/login" element={<Login users={users} />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route
+            path="/users/:userId"
+            element={<Portfolio stocks={stocks} />}
+          />
         </Routes>
       </main>
     </div>

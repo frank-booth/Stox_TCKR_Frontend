@@ -1,10 +1,33 @@
 import { Button, Divider, Form, Grid, Segment } from 'semantic-ui-react'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
-const Login = () => {
+const Login = ({ users }) => {
   let navigate = useNavigate()
 
-  const signUp = () => {
+  const initialState = {
+    username: '',
+    passwordDigest: ''
+  }
+  const [formState, setFormState] = useState(initialState)
+
+  const handleChange = (event) => {
+    setFormState({ ...formState, [event.target.id]: event.target.value })
+  }
+
+  const handleSubmit = () => {
+    const userData = users.find(
+      (user) =>
+        user.username === formState.username &&
+        user.passwordDigest === formState.passwordDigest
+    )
+    if (userData) {
+      navigate(`/users/${userData.id}`, { state: { user: userData } })
+    } else {
+      alert('try again')
+    }
+  }
+  const signUp = ({ users }) => {
     navigate('/signup')
   }
 
@@ -14,20 +37,26 @@ const Login = () => {
         <Segment placeholder>
           <Grid columns={2} relaxed="very" stackable>
             <Grid.Column>
-              <Form>
+              <Form onSubmit={handleSubmit}>
                 <Form.Input
+                  id="username"
                   icon="user"
                   iconPosition="left"
                   label="Username"
                   placeholder="Username"
+                  onChange={handleChange}
+                  value={formState.username}
                   required
                 />
 
                 <Form.Input
+                  id="passwordDigest"
                   icon="lock"
                   iconPosition="left"
                   label="Password"
                   type="password"
+                  onChange={handleChange}
+                  value={formState.passwordDigest}
                   required
                 />
 
