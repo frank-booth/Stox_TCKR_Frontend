@@ -1,15 +1,22 @@
 import { Image } from 'semantic-ui-react'
-import { NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import StokIcon from '../assets/Stok.png'
 
 const Home = () => {
-  return (
-    <div className="home-page">
-      <Image className="home-image" src={StokIcon} size="huge" centered />
+  let navigate = useNavigate()
 
-      <NavLink className="home-links" to="/login">
-        Login
-      </NavLink>
+  const handleClick = () => {
+    navigate('/login')
+  }
+  return (
+    <div className="home-page" onClick={handleClick}>
+      <Image
+        className="home-image"
+        src={StokIcon}
+        size="huge"
+        alt="logo icon"
+        centered
+      />
     </div>
   )
 }

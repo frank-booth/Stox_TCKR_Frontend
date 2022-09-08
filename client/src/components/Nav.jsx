@@ -9,7 +9,12 @@ const Nav = () => {
 
   return (
     <div className="nav-bar">
-      <img className="nav-bar-image" src={StokIcon} onClick={handleClick} />
+      <img
+        className="nav-bar-image"
+        src={StokIcon}
+        alt="logo icon"
+        onClick={handleClick}
+      />
       <div className="nav-links">
         <NavLink className="links" to="/">
           Home
@@ -19,6 +24,9 @@ const Nav = () => {
         </NavLink>
         <NavLink className="links" to="/news">
           News
+        </NavLink>
+        <NavLink className="links" to="/login">
+          Login
         </NavLink>
         <NavLink className="links" to="/profile">
           Profile

@@ -39,6 +39,7 @@ const SignUp = () => {
                   onChange={handleChange}
                   value={formState.firstName}
                   placeholder="First Name"
+                  required
                 />
                 <Form.Input
                   label="Last Name"
@@ -48,6 +49,7 @@ const SignUp = () => {
                   onChange={handleChange}
                   value={formState.lastName}
                   placeholder="Last Name"
+                  required
                 />
                 <Form.Input
                   label="Email"
@@ -57,6 +59,7 @@ const SignUp = () => {
                   onChange={handleChange}
                   value={formState.email}
                   placeholder="Email"
+                  required
                 />
                 <Form.Input
                   label="Username"
@@ -66,6 +69,7 @@ const SignUp = () => {
                   onChange={handleChange}
                   value={formState.username}
                   placeholder="Username"
+                  required
                 />
                 <Form.Input
                   label="Password"
@@ -75,6 +79,7 @@ const SignUp = () => {
                   onChange={handleChange}
                   value={formState.passwordDigest}
                   placeholder="Password"
+                  required
                 />
                 <Button type="submit" primary>
                   Submit

@@ -20,6 +20,7 @@ const Login = () => {
                   iconPosition="left"
                   label="Username"
                   placeholder="Username"
+                  required
                 />
 
                 <Form.Input
@@ -27,6 +28,7 @@ const Login = () => {
                   iconPosition="left"
                   label="Password"
                   type="password"
+                  required
                 />
 
                 <Button content="Login" primary />
