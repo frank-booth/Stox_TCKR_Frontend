@@ -12,6 +12,7 @@ import Login from './components/Login'
 import SignUp from './components/SignUp'
 import Portfolio from './components/Portfolio'
 import EditStock from './components/EditStock'
+import AddStock from './components/AddStock'
 
 function App() {
   const API_KEY = process.env.REACT_APP_ALPHA_KEY
@@ -71,7 +72,8 @@ function App() {
             path="/users/:userId"
             element={<Portfolio stocks={stocks} apiKey={API_KEY_MS} />}
           />
-          <Route path="/users/:userId/editStock" element={<EditStock />} />
+          <Route path="/users/:userId/editstock" element={<EditStock />} />
+          <Route path="/users/:userId/addstock" element={<AddStock />} />
         </Routes>
       </main>
     </div>

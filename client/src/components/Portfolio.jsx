@@ -1,4 +1,4 @@
-import { Table, Header, Icon } from 'semantic-ui-react'
+import { Table, Header, Icon, Button } from 'semantic-ui-react'
 import { BASE_URL_MS } from '../globals'
 import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
@@ -16,6 +16,10 @@ const Portfolio = ({ stocks, apiKey }) => {
 
   const editStock = (stock) => {
     navigate(`/users/${user.id}/editstock`, { state: { stock: stock } })
+  }
+
+  const addStock = () => {
+    navigate(`/users/${user.id}/addstock`, { state: { user: user } })
   }
   // const stockDataInfo = async (sym, quan) => {
   //   let res = await axios.get(
@@ -73,6 +77,9 @@ const Portfolio = ({ stocks, apiKey }) => {
             ))}
           </Table.Body>
         </Table>
+        <Button primary onClick={addStock}>
+          Add Stock
+        </Button>
       </div>
     </div>
   )
