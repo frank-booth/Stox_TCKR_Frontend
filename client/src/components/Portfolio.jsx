@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 
-const Portfolio = ({ stocks, apiKey }) => {
+const Portfolio = ({ stocks, apiKey, notes }) => {
   let navigate = useNavigate()
   let location = useLocation()
   let currentValue = 0
@@ -13,6 +13,7 @@ const Portfolio = ({ stocks, apiKey }) => {
   console.log(apiKey)
   let user = location.state.user
   let userStocks = stocks?.filter((stock) => stock.userId === user.id)
+  let userNotes = notes?.filter((note) => note.userId === user.id)
 
   const editStock = (stock) => {
     navigate(`/users/${user.id}/editstock`, { state: { stock: stock } })

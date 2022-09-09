@@ -21,6 +21,7 @@ function App() {
   console.log(API_KEY_MS)
   const [users, setUsers] = useState()
   const [stocks, setStocks] = useState()
+  const [notes, setNotes] = useState()
   const [cpiData, setCpiData] = useState()
 
   const getAllUsers = async () => {
@@ -41,6 +42,16 @@ function App() {
 
   useEffect(() => {
     getAllStocks()
+  }, [])
+
+  const getAllNotes = async () => {
+    let res = await axios.get(`${BASE_URL}/notes`)
+    console.log(res.data)
+    setNotes(res.data)
+  }
+
+  useEffect(() => {
+    getAllNotes()
   }, [])
 
   // const getCpiData = async () => {
@@ -70,7 +81,9 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route
             path="/users/:userId"
-            element={<Portfolio stocks={stocks} apiKey={API_KEY_MS} />}
+            element={
+              <Portfolio stocks={stocks} apiKey={API_KEY_MS} notes={notes} />
+            }
           />
           <Route
             path="/users/:userId/editstock"
