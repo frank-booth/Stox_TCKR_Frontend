@@ -17,7 +17,6 @@ import AddStock from './components/AddStock'
 function App() {
   const API_KEY = process.env.REACT_APP_MARKET_STACK_KEY
 
-  console.log(API_KEY)
   const [users, setUsers] = useState()
   const [stocks, setStocks] = useState()
   const [notes, setNotes] = useState()

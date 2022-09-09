@@ -8,9 +8,8 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
   let navigate = useNavigate()
   let location = useLocation()
   let currentValue = 0
-  const [stockData, setStockData] = useState()
+  const [stockData, setStockData] = useState({})
 
-  console.log(apiKey)
   let user = location.state.user
   let userStocks = stocks?.filter((stock) => stock.userId === user.id)
   let userNotes = notes?.filter((note) => note.userId === user.id)
@@ -22,17 +21,22 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
   const addStock = () => {
     navigate(`/users/${user.id}/addstock`, { state: { user: user } })
   }
+
+  // const value = (qty) => {
+  //   currentValue = qty * stockData
+  // }
+
   const stockDataInfo = async (sym, quan) => {
     let res = await axios.get(
-      `${BASE_URL_MS}eod/latest?access_key=6fbf9e69e7289f1826a1e67850102e4c&symbols=AAPL`
+      `${BASE_URL_MS}eod/latest?access_key=${apiKey}&symbols=${sym}`
     )
-    console.log(res.data)
+    console.log(res.data.data[0].close)
+    setStockData(res.data.data[0].close)
+    currentValue = quan * stockData
   }
 
-  const test = (qty) => {
-    currentValue = qty * 24
-    return currentValue
-  }
+  // return price
+  // }
 
   return (
     <div>
@@ -59,11 +63,13 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
           <Table.Body>
             {userStocks?.map((stock) => (
               <Table.Row key={stock.id}>
+                {stockDataInfo(stock.symbol, stock.quantity)}
+
                 <Table.Cell>{stock.symbol}</Table.Cell>
                 <Table.Cell>${stock.costBasis}</Table.Cell>
                 <Table.Cell>{stock.quantity}</Table.Cell>
-                <Table.Cell>{test(stock.quantity)}</Table.Cell>
-                <Table.Cell>{currentValue}</Table.Cell>
+                <Table.Cell>{stockData}</Table.Cell>
+                <Table.Cell>${currentValue}</Table.Cell>
                 <Table.Cell
                   selectable
                   textAlign="center"
