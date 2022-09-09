@@ -1,5 +1,5 @@
 import { Table, Header, Icon, Button } from 'semantic-ui-react'
-// import { BASE_URL_MS } from '../globals'
+import { BASE_URL_MS } from '../globals'
 import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
@@ -22,15 +22,12 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
   const addStock = () => {
     navigate(`/users/${user.id}/addstock`, { state: { user: user } })
   }
-  // const stockDataInfo = async (sym, quan) => {
-  //   let res = await axios.get(
-  //     `https://api.marketstack.com/v1/eod?access_key=6fbf9e69e7289f1826a1e67850102e4c$symbols=AAPL`
-  //   )
-  //   console.log(res.data)
-  // }
-  // useEffect(() => {
-  //   stockDataInfo('AMZN', 250)
-  // }, [])
+  const stockDataInfo = async (sym, quan) => {
+    let res = await axios.get(
+      `${BASE_URL_MS}eod/latest?access_key=6fbf9e69e7289f1826a1e67850102e4c&symbols=AAPL`
+    )
+    console.log(res.data)
+  }
 
   const test = (qty) => {
     currentValue = qty * 24

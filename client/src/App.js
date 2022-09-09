@@ -15,10 +15,9 @@ import EditStock from './components/EditStock'
 import AddStock from './components/AddStock'
 
 function App() {
-  const API_KEY = process.env.REACT_APP_ALPHA_KEY
-  const API_KEY_MS = process.env.MARKET_STACK_KEY
+  const API_KEY = process.env.REACT_APP_MARKET_STACK_KEY
 
-  console.log(API_KEY_MS)
+  console.log(API_KEY)
   const [users, setUsers] = useState()
   const [stocks, setStocks] = useState()
   const [notes, setNotes] = useState()
@@ -82,7 +81,7 @@ function App() {
           <Route
             path="/users/:userId"
             element={
-              <Portfolio stocks={stocks} apiKey={API_KEY_MS} notes={notes} />
+              <Portfolio stocks={stocks} apiKey={API_KEY} notes={notes} />
             }
           />
           <Route
