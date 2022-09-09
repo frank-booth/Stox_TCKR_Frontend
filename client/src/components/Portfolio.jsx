@@ -40,34 +40,33 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
 
   const stockPrice = async (obj) => {
     for (let i = 0; i < obj.length; i++) {
-      let symbol = obj[i].symbol
+      let stockSymbol = obj[i].symbol
       let res = await axios.get(
-        `${BASE_URL_MS}eod/latest?access_key=${apiKey}&symbols=${symbol}`
+        `${BASE_URL_MS}eod/latest?access_key=${apiKey}&symbols=${stockSymbol}`
       )
       // console.log(symbol)
       price = res.data.data[0].close
-      priceArr[i] = { symbol, price }
-      console.log(priceArr[i].price)
-    }
-    return priceArr
-  }
-
-  useEffect(() => {
-    stockPrice(userStocks)
-  }, [])
-
-  const priceChecker = (sym) => {
-    for (let i = 0; i < 2; i++) {
-      console.log(priceArr[i].symbol)
-      if (priceArr[i].symbol === sym) {
-        return priceArr[i].price
-      } else {
-        console.log('hello')
-      }
+      priceArr[i] = { symbol: stockSymbol, price: price }
+      // console.log(priceArr[i].price)
     }
   }
 
-  console.log(priceArr[0])
+  // useEffect(() => {
+  //   stockPrice(userStocks)
+  // }, [])
+
+  // const priceChecker = (sym) => {
+  //   for (let i = 0; i < userStocks.length; i++) {
+  //     // console.log(priceArr[i].symbol)
+  //     if (priceArr[i].symbol === sym) {
+  //       return priceArr[i].price
+  //     } else {
+  //       console.log('hello')
+  //     }
+  //   }
+  // }
+
+  console.log(priceArr)
 
   if (!userStocks) {
     return <h2> laoding please wait</h2>
@@ -101,7 +100,7 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
                   <Table.Cell>{stock.symbol}</Table.Cell>
                   <Table.Cell>${stock.costBasis}</Table.Cell>
                   <Table.Cell>{stock.quantity}</Table.Cell>
-                  <Table.Cell>{priceChecker(stock.symbol)}</Table.Cell>
+                  <Table.Cell>0</Table.Cell>
                   <Table.Cell>{currentValue}</Table.Cell>
                   <Table.Cell
                     selectable
