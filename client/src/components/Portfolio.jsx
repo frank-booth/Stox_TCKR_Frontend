@@ -10,7 +10,7 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
   let currentValue = 0
   let priceArr = []
   let price = 0
-  let symbol = ''
+
   const [stockData, setStockData] = useState([])
 
   let user = location.state.user
@@ -44,23 +44,30 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
       let res = await axios.get(
         `${BASE_URL_MS}eod/latest?access_key=${apiKey}&symbols=${symbol}`
       )
-      console.log(symbol)
+      // console.log(symbol)
       price = res.data.data[0].close
       priceArr[i] = { symbol, price }
       console.log(priceArr[i].price)
     }
+    return priceArr
   }
 
-  // stockPrice(userStocks)
-  // useEffect(() => {
-  //   stockPrice(userStocks)
-  // }, [])
+  useEffect(() => {
+    stockPrice(userStocks)
+  }, [])
 
-  // return price
-  // }
+  const priceChecker = (sym) => {
+    for (let i = 0; i < 2; i++) {
+      console.log(priceArr[i].symbol)
+      if (priceArr[i].symbol === sym) {
+        return priceArr[i].price
+      } else {
+        console.log('hello')
+      }
+    }
+  }
 
-  // console.log(stocks[0], stockData, currentValue)
-  console.log(typeof userStocks, userStocks.length)
+  console.log(priceArr[0])
 
   if (!userStocks) {
     return <h2> laoding please wait</h2>
@@ -94,7 +101,7 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
                   <Table.Cell>{stock.symbol}</Table.Cell>
                   <Table.Cell>${stock.costBasis}</Table.Cell>
                   <Table.Cell>{stock.quantity}</Table.Cell>
-                  <Table.Cell>{currentValue}</Table.Cell>
+                  <Table.Cell>{priceChecker(stock.symbol)}</Table.Cell>
                   <Table.Cell>{currentValue}</Table.Cell>
                   <Table.Cell
                     selectable
