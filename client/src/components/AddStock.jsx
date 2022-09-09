@@ -4,7 +4,7 @@ import { BASE_URL } from '../globals'
 import { useState } from 'react'
 import axios from 'axios'
 
-const AddStock = () => {
+const AddStock = ({ getAllStocks }) => {
   let location = useLocation()
   let navigate = useNavigate()
   let user = location.state.user
@@ -25,7 +25,8 @@ const AddStock = () => {
     event.preventDefault()
     let res = await axios.post(`${BASE_URL}/stocks/${user.id}`, formState)
     setFormState(initialState)
-    // navigate(`/riders/${res.data.id}`, { state: { rider: res.data } })
+    await getAllStocks()
+    navigate(-1)
   }
   return (
     <div>

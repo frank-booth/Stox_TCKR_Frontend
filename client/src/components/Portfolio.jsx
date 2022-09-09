@@ -1,5 +1,5 @@
 import { Table, Header, Icon, Button } from 'semantic-ui-react'
-import { BASE_URL_MS } from '../globals'
+// import { BASE_URL_MS } from '../globals'
 import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
@@ -62,7 +62,7 @@ const Portfolio = ({ stocks, apiKey }) => {
             {userStocks?.map((stock) => (
               <Table.Row key={stock.id}>
                 <Table.Cell>{stock.symbol}</Table.Cell>
-                <Table.Cell>{stock.costBasis}</Table.Cell>
+                <Table.Cell>${stock.costBasis}</Table.Cell>
                 <Table.Cell>{stock.quantity}</Table.Cell>
                 <Table.Cell>{test(stock.quantity)}</Table.Cell>
                 <Table.Cell>{currentValue}</Table.Cell>

@@ -72,8 +72,14 @@ function App() {
             path="/users/:userId"
             element={<Portfolio stocks={stocks} apiKey={API_KEY_MS} />}
           />
-          <Route path="/users/:userId/editstock" element={<EditStock />} />
-          <Route path="/users/:userId/addstock" element={<AddStock />} />
+          <Route
+            path="/users/:userId/editstock"
+            element={<EditStock getAllStocks={getAllStocks} />}
+          />
+          <Route
+            path="/users/:userId/addstock"
+            element={<AddStock getAllStocks={getAllStocks} />}
+          />
         </Routes>
       </main>
     </div>
