@@ -8,6 +8,9 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
   let navigate = useNavigate()
   let location = useLocation()
   let currentValue = 0
+  let priceArr = []
+  let price = 0
+  let symbol = ''
   const [stockData, setStockData] = useState([])
 
   let user = location.state.user
@@ -26,20 +29,39 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
   //   currentValue = qty * stockData
   // }
 
-  const stockDataInfo = async (sym, quan) => {
-    let res = await axios.get(
-      `${BASE_URL_MS}eod/latest?access_key=${apiKey}&symbols=${sym}`
-    )
-    // console.log(res.data.data[0].close)
-    setStockData(res.data.data[0].close)
-    currentValue = quan * stockData
+  // const stockDataInfo = async (sym, quan) => {
+  //   let res = await axios.get(
+  //     `${BASE_URL_MS}eod/latest?access_key=${apiKey}&symbols=${sym}`
+  //   )
+  //   // console.log(res.data.data[0].close)
+  //   setStockData(res.data.data[0].close)
+  //   currentValue = quan * stockData
+  // }
+
+  const stockPrice = async (obj) => {
+    for (let i = 0; i < obj.length; i++) {
+      let symbol = obj[i].symbol
+      let res = await axios.get(
+        `${BASE_URL_MS}eod/latest?access_key=${apiKey}&symbols=${symbol}`
+      )
+      console.log(symbol)
+      price = res.data.data[0].close
+      priceArr[i] = { symbol, price }
+      console.log(priceArr[i].price)
+    }
   }
+
+  // stockPrice(userStocks)
+  // useEffect(() => {
+  //   stockPrice(userStocks)
+  // }, [])
 
   // return price
   // }
 
   // console.log(stocks[0], stockData, currentValue)
-  // console.log(typeof userStocks, userStocks)
+  console.log(typeof userStocks, userStocks.length)
+
   if (!userStocks) {
     return <h2> laoding please wait</h2>
   } else {
@@ -68,6 +90,7 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
             <Table.Body>
               {userStocks?.map((stock) => (
                 <Table.Row key={stock.id}>
+                  {/* {stockDataInfo(stock.symbol, stock.quantity)} */}
                   <Table.Cell>{stock.symbol}</Table.Cell>
                   <Table.Cell>${stock.costBasis}</Table.Cell>
                   <Table.Cell>{stock.quantity}</Table.Cell>
