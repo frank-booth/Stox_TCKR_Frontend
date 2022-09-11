@@ -131,13 +131,15 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
             </Button>
           </Button.Group>
         </div>
-        <div>
+        <div className="card-container">
           <Card.Group>
             {userNotes?.map((note) => (
               <Card key={note.id}>
                 <Card.Content header={note.title} />
                 <Card.Content description={note.content} />
-                <Button onClick={() => editNote(note)}>Edit</Button>
+                <Button onClick={() => editNote(note)} color="violet">
+                  Edit
+                </Button>
               </Card>
             ))}
           </Card.Group>

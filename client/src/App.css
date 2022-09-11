@@ -101,7 +101,15 @@ h1 {
     
   }
 
-  
+  .card-container{
+    display:flex;
+    margin-top:40px;
+    flex-direction: row;
+    flex-wrap:wrap;
+    align-items: center;
+    justify-content: center;
+   
+  }
 
 
 
