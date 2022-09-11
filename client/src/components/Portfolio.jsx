@@ -1,4 +1,4 @@
-import { Table, Header, Icon, Button, ButtonGroup } from 'semantic-ui-react'
+import { Table, Header, Icon, Button, Card } from 'semantic-ui-react'
 import { BASE_URL_MS } from '../globals'
 import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
@@ -27,6 +27,10 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
 
   const addNote = () => {
     navigate(`/users/${user.id}/addnote`, { state: { user: user } })
+  }
+
+  const editNote = (note) => {
+    navigate(`/users/${user.id}/editnote`, { state: { note: note } })
   }
 
   // const value = (qty) => {
@@ -126,6 +130,17 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
               Add Note
             </Button>
           </Button.Group>
+        </div>
+        <div>
+          <Card.Group>
+            {userNotes?.map((note) => (
+              <Card key={note.id}>
+                <Card.Content header={note.title} />
+                <Card.Content description={note.content} />
+                <Button onClick={() => editNote(note)}>Edit</Button>
+              </Card>
+            ))}
+          </Card.Group>
         </div>
       </div>
     )

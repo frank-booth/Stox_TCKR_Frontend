@@ -20,7 +20,7 @@ const EditNote = ({ getAllNotes }) => {
 
   const initialStateNote = {
     title: `${note.title}`,
-    content: `${note.cotent}`
+    content: `${note.content}`
   }
 
   const [noteFormState, setNoteFormState] = useState(initialStateNote)
