@@ -11,7 +11,7 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
   let priceArr = []
   let price = 0
 
-  const [stockData, setStockData] = useState([])
+  const [stockData, setStockData] = useState()
 
   let user = location.state.user
   let userStocks = stocks?.filter((stock) => stock.userId === user.id)
@@ -49,12 +49,18 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
   const stockPrice = async (obj) => {
     for (let i = 0; i < obj.length; i++) {
       let stockSymbol = obj[i].symbol
+      let priceObj = {}
       let res = await axios.get(
         `${BASE_URL_MS}eod/latest?access_key=${apiKey}&symbols=${stockSymbol}`
       )
       // console.log(symbol)
       price = res.data.data[0].close
-      priceArr[i] = { symbol: stockSymbol, price: price }
+      priceObj = {
+        ['symbol']: stockSymbol,
+        ['price']: price
+      }
+      priceArr.push(priceObj)
+      // return priceArr
       // console.log(priceArr[i].price)
     }
   }
@@ -63,20 +69,20 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
   //   stockPrice(userStocks)
   // }, [])
 
-  // const priceChecker = (sym) => {
-  //   for (let i = 0; i < userStocks.length; i++) {
-  //     // console.log(priceArr[i].symbol)
-  //     if (priceArr[i].symbol === sym) {
-  //       return priceArr[i].price
-  //     } else {
-  //       console.log('hello')
-  //     }
-  //   }
-  // }
+  console.log(stockData)
 
-  console.log(priceArr)
+  const priceChecker = (sym, qty, arr) => {
+    console.log(arr)
+    for (let i = 0; i < 2; i++) {
+      // console.log(priceArr[i].symbol)
+      if (arr[i] === sym) {
+        currentValue = qty * arr[i].price
+        return arr[i].price
+      }
+    }
+  }
 
-  if (!userStocks) {
+  if (!stockPrice) {
     return <h2> laoding please wait</h2>
   } else {
     return (
@@ -104,11 +110,12 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
             <Table.Body>
               {userStocks?.map((stock) => (
                 <Table.Row key={stock.id}>
-                  {/* {stockDataInfo(stock.symbol, stock.quantity)} */}
                   <Table.Cell>{stock.symbol}</Table.Cell>
                   <Table.Cell>${stock.costBasis}</Table.Cell>
                   <Table.Cell>{stock.quantity}</Table.Cell>
-                  <Table.Cell>0</Table.Cell>
+                  <Table.Cell>
+                    {/* {priceChecker(stock.symbol, stock.quantity, priceArr)} */}
+                  </Table.Cell>
                   <Table.Cell>{currentValue}</Table.Cell>
                   <Table.Cell
                     selectable
