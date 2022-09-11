@@ -1,4 +1,4 @@
-import { Search, Grid, Input, Form, Button } from 'semantic-ui-react'
+import { Segment, Grid, Form, Button, Header, Item } from 'semantic-ui-react'
 import { useState } from 'react'
 import axios from 'axios'
 
@@ -13,13 +13,14 @@ const News = () => {
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // let res = await axios.get(
-    //   `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=${searchQuery}&topics=technology&apikey=${API_KEY2}`
-    // )
-    // console.log(res.data)
-    // setSearchData(res.data)
-    setSearchQuery('')
     console.log(searchQuery)
+    let res = await axios.get(
+      `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=${searchQuery}&topics=technology&apikey=${API_KEY2}`
+    )
+    console.log(res.data.feed)
+    await setSearchData(res.data.feed)
+    setSearchQuery('')
+    console.log(searchData)
   }
 
   // const handleKeyPress = (e) => {
@@ -30,10 +31,10 @@ const News = () => {
   // }
 
   return (
-    <div>
+    <div className="search-bar-container">
       <Grid>
-        <Grid.Column width={6}>
-          <Form onSubmit={handleSubmit}>
+        <Grid.Column width={4}>
+          <Form onSubmit={handleSubmit} widths="equal">
             <Form.Input
               id="searchQuery"
               type="text"
@@ -47,6 +48,24 @@ const News = () => {
             />
             <Button type="submit">Search</Button>
           </Form>
+        </Grid.Column>
+        <Grid.Column></Grid.Column>
+      </Grid>
+      <Grid>
+        <Grid.Column width={15}>
+          <Segment>
+            <Item.Group>
+              {searchData?.map((article) => (
+                <Item key={article.title}>
+                  <Item.Content>
+                    <Item.Header as="h3">{article.title}</Item.Header>
+                    <Item.Meta>Summary</Item.Meta>
+                    <Item.Descritpion>{article.summary}</Item.Descritpion>
+                  </Item.Content>
+                </Item>
+              ))}
+            </Item.Group>
+          </Segment>
         </Grid.Column>
       </Grid>
     </div>
