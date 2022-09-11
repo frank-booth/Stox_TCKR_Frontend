@@ -69,8 +69,8 @@ const AddNote = ({ getAllNotes }) => {
                     placeholder="Note Content"
                     required
                   />
-
-                  <Button type="submit" primary>
+                  <br />
+                  <Button className="add-note-button" type="submit" primary>
                     Submit
                   </Button>
                 </Form>
