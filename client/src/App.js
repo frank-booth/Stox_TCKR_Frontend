@@ -13,6 +13,7 @@ import SignUp from './components/SignUp'
 import Portfolio from './components/Portfolio'
 import EditStock from './components/EditStock'
 import AddStock from './components/AddStock'
+import AddNote from './components/AddNote'
 
 function App() {
   const API_KEY = process.env.REACT_APP_MARKET_STACK_KEY
@@ -90,6 +91,10 @@ function App() {
           <Route
             path="/users/:userId/addstock"
             element={<AddStock getAllStocks={getAllStocks} />}
+          />
+          <Route
+            path="/users/:userId/addnote"
+            element={<AddNote getAllNotes={getAllNotes} />}
           />
         </Routes>
       </main>

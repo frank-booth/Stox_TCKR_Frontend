@@ -83,14 +83,14 @@ const EditStock = ({ getAllStocks }) => {
                     placeholder="Stock Quantity"
                     required
                   />
+                  <Button.Group>
+                    <Button positive>Update</Button>
+                    <Button.Or />
+                    <Button negative onClick={(e) => deleteStock(e)}>
+                      Delete
+                    </Button>
+                  </Button.Group>
                 </Form>
-                <Button.Group>
-                  <Button positive>Update</Button>
-                  <Button.Or />
-                  <Button negative onClick={(e) => deleteStock(e)}>
-                    Delete
-                  </Button>
-                </Button.Group>
               </Grid.Column>
             </Grid>
           </Segment>
