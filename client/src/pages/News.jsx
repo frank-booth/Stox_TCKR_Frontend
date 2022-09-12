@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const News = () => {
   const API_KEY2 = process.env.REACT_APP_ALPHA_KEY
-  const [searchData, setSearchData] = useState()
+  const [searchResults, setSearchResults] = useState()
   const [searchQuery, setSearchQuery] = useState('')
 
   const handleChange = (e) => {
@@ -18,7 +18,8 @@ const News = () => {
       `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=${searchQuery}&topics=technology&apikey=${API_KEY2}`
     )
     console.log(res.data.feed)
-    await setSearchData(res.data.feed)
+    console.log(res.data.feed[0].source_domain)
+    await setSearchResults(res.data.feed)
     setSearchQuery('')
   }
 
@@ -35,7 +36,7 @@ const News = () => {
     <div className="search-bar-container">
       <Grid>
         <Grid.Column width={4}>
-          <Form onSubmit={handleSubmit} widths="equal">
+          <Form widths="equal" onSubmit={handleSubmit}>
             <Form.Input
               id="searchQuery"
               type="text"
@@ -52,23 +53,31 @@ const News = () => {
         </Grid.Column>
         <Grid.Column></Grid.Column>
       </Grid>
-      <Grid>
-        <Grid.Column width={15}>
-          <Segment>
-            <Item.Group>
-              {searchData?.map((article) => (
-                <Item key={article.title}>
-                  <Item.Content>
-                    <Item.Header as="h3">{article.title}</Item.Header>
-                    <Item.Meta>Summary</Item.Meta>
-                    <Item.Descritpion>{article.summary}</Item.Descritpion>
-                  </Item.Content>
-                </Item>
-              ))}
-            </Item.Group>
-          </Segment>
-        </Grid.Column>
-      </Grid>
+      {searchResults ? (
+        <Grid>
+          <Grid.Column width={15}>
+            <Segment>
+              <Item.Group>
+                {searchResults.map((article) => (
+                  <Item key={article.url}>
+                    <Item.Content>
+                      <Item.Header as="h3" href={article.url}>
+                        {article.title}
+                      </Item.Header>
+                      <br />
+                      <br />
+                      {/* <Item.Meta>Summary</Item.Meta> */}
+                      <Item.Header>Summary: {article.summary}</Item.Header>
+                    </Item.Content>
+                  </Item>
+                ))}
+              </Item.Group>
+            </Segment>
+          </Grid.Column>
+        </Grid>
+      ) : (
+        <p>Still Loading</p>
+      )}
     </div>
   )
   // }

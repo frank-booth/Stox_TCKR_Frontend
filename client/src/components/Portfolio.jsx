@@ -22,6 +22,7 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
 
   const addStock = () => {
     navigate(`/users/${user.id}/addstock`, { state: { user: user } })
+    stockPrice(userStocks)
   }
 
   const addNote = () => {
@@ -53,15 +54,13 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
       let res = await axios.get(
         `${BASE_URL_MS}eod/latest?access_key=${apiKey}&symbols=${stockSymbol}`
       )
-      console.log(res.data.data)
+
       price = res.data.data[0].close
       priceObj = {
         symbol: stockSymbol,
         price: price
       }
       priceArr.push(priceObj)
-
-      console.log(priceArr[i].price)
     }
     await setStockInfo(priceArr)
     console.log(priceArr)
@@ -71,11 +70,8 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
     stockPrice(userStocks)
   }, [])
 
-  console.log(stockInfo)
-
   const priceChecker = (sym, qty, arr) => {
-    console.log(arr)
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < arr.length; i++) {
       // console.log(priceArr[i].symbol)
       if (arr[i].symbol === sym) {
         currentValue = qty * arr[i].price
@@ -130,9 +126,7 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
                 </Table.Row>
               ))}
             </Table.Body>
-          ) : (
-            <p>Still Loading</p>
-          )}
+          ) : null}
         </Table>
         <Button.Group>
           <Button color="violet" onClick={addStock}>
