@@ -55,29 +55,32 @@ const News = () => {
       </Grid>
       {searchResults ? (
         <Grid>
-          <Grid.Column width={15}>
-            <Segment>
+          <Grid.Column width={12}>
+            <Segment.Group>
               <Item.Group>
                 {searchResults.map((article) => (
-                  <Item key={article.url}>
-                    <Item.Content>
-                      <Item.Header as="h3" href={article.url}>
-                        {article.title}
-                      </Item.Header>
-                      <br />
-                      <br />
-                      {/* <Item.Meta>Summary</Item.Meta> */}
-                      <Item.Header>Summary: {article.summary}</Item.Header>
-                    </Item.Content>
-                  </Item>
+                  <Segment>
+                    <Item key={article.url}>
+                      <Item.Content>
+                        <Item.Description>{article.title}</Item.Description>
+                        <br />
+                        <Item.Description className="item-blue">
+                          Summary: {article.summary}
+                        </Item.Description>
+                        <Item.Description as="a" href={article.url}>
+                          Article Link
+                        </Item.Description>
+                        <br />
+                        <br />
+                      </Item.Content>
+                    </Item>
+                  </Segment>
                 ))}
               </Item.Group>
-            </Segment>
+            </Segment.Group>
           </Grid.Column>
         </Grid>
-      ) : (
-        <p>Still Loading</p>
-      )}
+      ) : null}
     </div>
   )
   // }
