@@ -20,7 +20,6 @@ const News = () => {
     console.log(res.data.feed)
     await setSearchData(res.data.feed)
     setSearchQuery('')
-    console.log(searchData)
   }
 
   // const handleKeyPress = (e) => {
@@ -29,7 +28,9 @@ const News = () => {
   //     handleSubmit()
   //   }
   // }
-
+  // if (!searchData) {
+  //   return <h2> loading please wait</h2>
+  // } else {
   return (
     <div className="search-bar-container">
       <Grid>
@@ -70,6 +71,7 @@ const News = () => {
       </Grid>
     </div>
   )
+  // }
 }
 
 export default News

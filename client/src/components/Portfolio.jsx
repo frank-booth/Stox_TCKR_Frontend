@@ -7,11 +7,10 @@ import { useState, useEffect } from 'react'
 const Portfolio = ({ stocks, apiKey, notes }) => {
   let navigate = useNavigate()
   let location = useLocation()
+  const [stockInfo, setStockInfo] = useState()
   let currentValue = 0
   let priceArr = []
   let price = 0
-
-  const [stockData, setStockData] = useState()
 
   let user = location.state.user
   let userStocks = stocks?.filter((stock) => stock.userId === user.id)
@@ -46,114 +45,117 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
   //   currentValue = quan * stockData
   // }
 
-  const stockPrice = async (obj) => {
-    for (let i = 0; i < obj.length; i++) {
-      let stockSymbol = obj[i].symbol
+  const stockPrice = async (arr) => {
+    console.log(arr.length)
+    for (let i = 0; i < arr.length; i++) {
+      let stockSymbol = arr[i].symbol
       let priceObj = {}
       let res = await axios.get(
         `${BASE_URL_MS}eod/latest?access_key=${apiKey}&symbols=${stockSymbol}`
       )
-      // console.log(symbol)
+      console.log(res.data.data)
       price = res.data.data[0].close
       priceObj = {
-        ['symbol']: stockSymbol,
-        ['price']: price
+        symbol: stockSymbol,
+        price: price
       }
       priceArr.push(priceObj)
-      // return priceArr
-      // console.log(priceArr[i].price)
+
+      console.log(priceArr[i].price)
     }
+    setStockInfo(priceArr)
+    console.log(priceArr)
   }
 
-  // useEffect(() => {
-  //   stockPrice(userStocks)
-  // }, [])
+  useEffect(() => {
+    stockPrice(userStocks)
+  }, [])
 
-  console.log(stockData)
+  console.log(stockInfo)
 
   const priceChecker = (sym, qty, arr) => {
     console.log(arr)
     for (let i = 0; i < 2; i++) {
       // console.log(priceArr[i].symbol)
-      if (arr[i] === sym) {
+      if (arr[i].symbol === sym) {
         currentValue = qty * arr[i].price
         return arr[i].price
       }
     }
   }
 
-  if (!stockPrice) {
-    return <h2> laoding please wait</h2>
-  } else {
-    return (
-      <div>
-        <div className="portfolio-header">
-          <Header color="violet" size="huge">
-            <Icon name="chart line" />
-            <Header.Content className="header">
-              {user.username}'s Portfolio
-            </Header.Content>
-          </Header>
-        </div>
-        <div className="table-container">
-          <Table celled color="grey" inverted>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>Symbol</Table.HeaderCell>
-                <Table.HeaderCell>Cost Basis</Table.HeaderCell>
-                <Table.HeaderCell>Share Quantity</Table.HeaderCell>
-                <Table.HeaderCell>Previous Day Close</Table.HeaderCell>
-                <Table.HeaderCell>Current Value</Table.HeaderCell>
-                <Table.HeaderCell>Action</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              {userStocks?.map((stock) => (
-                <Table.Row key={stock.id}>
-                  <Table.Cell>{stock.symbol}</Table.Cell>
-                  <Table.Cell>${stock.costBasis}</Table.Cell>
-                  <Table.Cell>{stock.quantity}</Table.Cell>
-                  <Table.Cell>
-                    {/* {priceChecker(stock.symbol, stock.quantity, priceArr)} */}
-                  </Table.Cell>
-                  <Table.Cell>{currentValue}</Table.Cell>
-                  <Table.Cell
-                    selectable
-                    textAlign="center"
-                    onClick={() => editStock(stock)}
-                  >
-                    Edit
-                  </Table.Cell>
-                </Table.Row>
-              ))}
-            </Table.Body>
-          </Table>
-          <Button.Group>
-            <Button color="violet" onClick={addStock}>
-              Add Stock
-            </Button>
-            <Button.Or />
-            <Button color="violet" onClick={addNote}>
-              Add Note
-            </Button>
-          </Button.Group>
-        </div>
-        <div className="card-container">
-          <Card.Group>
-            {userNotes?.map((note) => (
-              <Card key={note.id}>
-                <Card.Content header={note.title} />
-                <Card.Content description={note.content} />
-                <Button onClick={() => editNote(note)} color="violet">
-                  Edit
-                </Button>
-              </Card>
-            ))}
-          </Card.Group>
-        </div>
+  // if (!stockPrice) {
+  //   return <h2> laoding please wait</h2>
+  // } else {
+  return (
+    <div>
+      <div className="portfolio-header">
+        <Header color="violet" size="huge">
+          <Icon name="chart line" />
+          <Header.Content className="header">
+            {user.username}'s Portfolio
+          </Header.Content>
+        </Header>
       </div>
-    )
-  }
+      <div className="table-container">
+        <Table celled color="grey" inverted>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Symbol</Table.HeaderCell>
+              <Table.HeaderCell>Cost Basis</Table.HeaderCell>
+              <Table.HeaderCell>Share Quantity</Table.HeaderCell>
+              <Table.HeaderCell>Previous Day Close</Table.HeaderCell>
+              <Table.HeaderCell>Current Value</Table.HeaderCell>
+              <Table.HeaderCell>Action</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {userStocks?.map((stock) => (
+              <Table.Row key={stock.id}>
+                <Table.Cell>{stock.symbol}</Table.Cell>
+                <Table.Cell>${stock.costBasis}</Table.Cell>
+                <Table.Cell>{stock.quantity}</Table.Cell>
+                <Table.Cell>
+                  {priceChecker(stock.symbol, stock.quantity, stockInfo)}
+                </Table.Cell>
+                <Table.Cell>{currentValue}</Table.Cell>
+                <Table.Cell
+                  selectable
+                  textAlign="center"
+                  onClick={() => editStock(stock)}
+                >
+                  Edit
+                </Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table>
+        <Button.Group>
+          <Button color="violet" onClick={addStock}>
+            Add Stock
+          </Button>
+          <Button.Or />
+          <Button color="violet" onClick={addNote}>
+            Add Note
+          </Button>
+        </Button.Group>
+      </div>
+      <div className="card-container">
+        <Card.Group>
+          {userNotes?.map((note) => (
+            <Card key={note.id}>
+              <Card.Content header={note.title} />
+              <Card.Content description={note.content} />
+              <Button onClick={() => editNote(note)} color="violet">
+                Edit
+              </Button>
+            </Card>
+          ))}
+        </Card.Group>
+      </div>
+    </div>
+  )
+  // }
 }
 
 export default Portfolio
