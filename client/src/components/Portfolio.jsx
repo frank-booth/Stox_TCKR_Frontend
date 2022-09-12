@@ -86,7 +86,7 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
   return (
     <div>
       <div className="portfolio-header">
-        <Header color="violet" size="huge">
+        <Header color="grey" inverted size="huge">
           <Icon name="chart line" />
           <Header.Content className="header">
             {user.username}'s Portfolio
@@ -129,11 +129,11 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
           ) : null}
         </Table>
         <Button.Group>
-          <Button color="violet" onClick={addStock}>
+          <Button color="yellow" onClick={addStock}>
             Add Stock
           </Button>
           <Button.Or />
-          <Button color="violet" onClick={addNote}>
+          <Button color="orange" onClick={addNote}>
             Add Note
           </Button>
         </Button.Group>
@@ -144,7 +144,7 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
             <Card key={note.id}>
               <Card.Content header={note.title} />
               <Card.Content description={note.content} />
-              <Button onClick={() => editNote(note)} color="violet">
+              <Button onClick={() => editNote(note)} color="orange">
                 Edit
               </Button>
             </Card>

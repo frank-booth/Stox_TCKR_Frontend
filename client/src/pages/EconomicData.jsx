@@ -1,3 +1,5 @@
+import { Bar } from 'recharts'
+
 const EconomicData = () => {
   return (
     <div>

@@ -42,7 +42,7 @@ const EditStock = ({ getAllStocks }) => {
   return (
     <div>
       <div className="add-stock-header">
-        <Header as="h2" color="violet" icon>
+        <Header as="h2" color="grey" inverted icon>
           <Icon name="tasks" />
           Update or Delete Selected Stock
         </Header>

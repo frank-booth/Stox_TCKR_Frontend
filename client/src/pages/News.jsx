@@ -62,7 +62,9 @@ const News = () => {
                   <Segment>
                     <Item key={article.url}>
                       <Item.Content>
-                        <Item.Description>{article.title}</Item.Description>
+                        <Item.Description>
+                          Title: {article.title}
+                        </Item.Description>
                         <br />
                         <Item.Description className="item-blue">
                           Summary: {article.summary}
