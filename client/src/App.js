@@ -99,7 +99,7 @@ function App() {
           />
           <Route
             path="/users/:userId/editnote"
-            element={<EditNote getAllNotess={getAllNotes} />}
+            element={<EditNote getAllNotes={getAllNotes} />}
           />
         </Routes>
       </main>
