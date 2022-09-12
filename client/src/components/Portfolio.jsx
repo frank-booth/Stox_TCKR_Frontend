@@ -63,7 +63,7 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
 
       console.log(priceArr[i].price)
     }
-    setStockInfo(priceArr)
+    await setStockInfo(priceArr)
     console.log(priceArr)
   }
 
@@ -109,26 +109,30 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
               <Table.HeaderCell>Action</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-          <Table.Body>
-            {userStocks?.map((stock) => (
-              <Table.Row key={stock.id}>
-                <Table.Cell>{stock.symbol}</Table.Cell>
-                <Table.Cell>${stock.costBasis}</Table.Cell>
-                <Table.Cell>{stock.quantity}</Table.Cell>
-                <Table.Cell>
-                  {priceChecker(stock.symbol, stock.quantity, stockInfo)}
-                </Table.Cell>
-                <Table.Cell>{currentValue}</Table.Cell>
-                <Table.Cell
-                  selectable
-                  textAlign="center"
-                  onClick={() => editStock(stock)}
-                >
-                  Edit
-                </Table.Cell>
-              </Table.Row>
-            ))}
-          </Table.Body>
+          {stockInfo ? (
+            <Table.Body>
+              {userStocks?.map((stock) => (
+                <Table.Row key={stock.id}>
+                  <Table.Cell>{stock.symbol}</Table.Cell>
+                  <Table.Cell>${stock.costBasis}</Table.Cell>
+                  <Table.Cell>{stock.quantity}</Table.Cell>
+                  <Table.Cell>
+                    ${priceChecker(stock.symbol, stock.quantity, stockInfo)}
+                  </Table.Cell>
+                  <Table.Cell>${currentValue.toFixed(2)}</Table.Cell>
+                  <Table.Cell
+                    selectable
+                    textAlign="center"
+                    onClick={() => editStock(stock)}
+                  >
+                    Edit
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+            </Table.Body>
+          ) : (
+            <p>Still Loading</p>
+          )}
         </Table>
         <Button.Group>
           <Button color="violet" onClick={addStock}>
