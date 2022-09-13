@@ -58,6 +58,7 @@ h1 {
 }
 .nav-bar-image{
   max-height: 75px;
+  margin-left:-10px
 }
 
 .nav-bar .nav-links{
