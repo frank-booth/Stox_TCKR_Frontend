@@ -33,19 +33,6 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
     navigate(`/users/${user.id}/editnote`, { state: { note: note } })
   }
 
-  // const value = (qty) => {
-  //   currentValue = qty * stockData
-  // }
-
-  // const stockDataInfo = async (sym, quan) => {
-  //   let res = await axios.get(
-  //     `${BASE_URL_MS}eod/latest?access_key=${apiKey}&symbols=${sym}`
-  //   )
-  //   // console.log(res.data.data[0].close)
-  //   setStockData(res.data.data[0].close)
-  //   currentValue = quan * stockData
-  // }
-
   const stockPrice = async (arr) => {
     console.log(arr.length)
     for (let i = 0; i < arr.length; i++) {
@@ -80,9 +67,6 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
     }
   }
 
-  // if (!stockPrice) {
-  //   return <h2> laoding please wait</h2>
-  // } else {
   return (
     <div>
       <div className="portfolio-header">

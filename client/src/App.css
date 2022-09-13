@@ -88,7 +88,9 @@ h1 {
   }
 
   .home-image{
-    backdrop-filter: blur(5px)
+    backdrop-filter: blur(3px);
+    height:600px;
+    margin-top:80px
   }
 
   .table-container {
@@ -115,6 +117,10 @@ h1 {
 
   .search-bar-container{
     margin:10px 0 0 10px;
+  }
+
+  .chart{
+    background-color:white
   }
   
 

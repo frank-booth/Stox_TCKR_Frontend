@@ -13,7 +13,7 @@ const Home = () => {
       <Image
         className="home-image"
         src={StokIcon}
-        size="huge"
+        // size="huge"
         alt="logo icon"
         centered
       />
