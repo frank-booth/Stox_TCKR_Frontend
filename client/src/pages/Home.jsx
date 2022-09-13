@@ -10,13 +10,7 @@ const Home = () => {
   }
   return (
     <div className="home-page" onClick={handleClick}>
-      <Image
-        className="home-image"
-        src={StokIcon}
-        // size="huge"
-        alt="logo icon"
-        centered
-      />
+      <Image className="home-image" src={StokIcon} alt="logo icon" centered />
     </div>
   )
 }
