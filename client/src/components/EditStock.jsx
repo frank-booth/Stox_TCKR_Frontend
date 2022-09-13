@@ -32,6 +32,7 @@ const EditStock = ({ getAllStocks }) => {
     await getAllStocks()
     navigate(-1)
   }
+
   const deleteStock = async (e) => {
     e.preventDefault()
     await axios.delete(`${BASE_URL}/stocks/${stock.id}`)

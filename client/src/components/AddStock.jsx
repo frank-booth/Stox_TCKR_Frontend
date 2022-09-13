@@ -31,6 +31,7 @@ const AddStock = ({ getAllStocks }) => {
     await getAllStocks()
     navigate(-1)
   }
+
   return (
     <div>
       <div className="add-stock-header">

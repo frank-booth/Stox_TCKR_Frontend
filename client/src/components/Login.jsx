@@ -48,7 +48,6 @@ const Login = ({ users }) => {
                   value={formState.username}
                   required
                 />
-
                 <Form.Input
                   id="passwordDigest"
                   icon="lock"
@@ -59,11 +58,9 @@ const Login = ({ users }) => {
                   value={formState.passwordDigest}
                   required
                 />
-
                 <Button content="Login" primary />
               </Form>
             </Grid.Column>
-
             <Grid.Column verticalAlign="middle">
               <Button
                 content="Sign up"
@@ -73,7 +70,6 @@ const Login = ({ users }) => {
               />
             </Grid.Column>
           </Grid>
-
           <Divider vertical>Or</Divider>
         </Segment>
       </div>

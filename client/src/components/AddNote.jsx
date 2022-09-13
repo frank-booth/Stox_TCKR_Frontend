@@ -35,6 +35,7 @@ const AddNote = ({ getAllNotes }) => {
     await getAllNotes()
     navigate(-1)
   }
+
   return (
     <div>
       <div className="add-stock-header">

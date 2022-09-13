@@ -3,6 +3,7 @@ import StokIcon from '../assets/Stok.png'
 
 const Nav = () => {
   let navigate = useNavigate()
+
   const handleClick = () => {
     navigate('/')
   }

@@ -7,11 +7,12 @@ import { useState, useEffect } from 'react'
 const Portfolio = ({ stocks, apiKey, notes }) => {
   let navigate = useNavigate()
   let location = useLocation()
+
   const [stockInfo, setStockInfo] = useState()
-  let currentValue = 0
+
+  let currentValue = ''
   let priceArr = []
   let price = 0
-
   let user = location.state.user
   let userStocks = stocks?.filter((stock) => stock.userId === user.id)
   let userNotes = notes?.filter((note) => note.userId === user.id)
@@ -41,7 +42,6 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
       let res = await axios.get(
         `${BASE_URL_MS}eod/latest?access_key=${apiKey}&symbols=${stockSymbol}`
       )
-
       price = res.data.data[0].close
       priceObj = {
         symbol: stockSymbol,
@@ -50,7 +50,6 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
       priceArr.push(priceObj)
     }
     await setStockInfo(priceArr)
-    console.log(priceArr)
   }
 
   useEffect(() => {
@@ -58,10 +57,12 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
   }, [])
 
   const priceChecker = (sym, qty, arr) => {
+    let value = 0
     for (let i = 0; i < arr.length; i++) {
-      // console.log(priceArr[i].symbol)
       if (arr[i].symbol === sym) {
-        currentValue = qty * arr[i].price
+        value = (qty * arr[i].price).toFixed(2)
+        // number conversion help: https://code-boxx.com/add-comma-to-numbers-javascript/
+        currentValue = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
         return arr[i].price
       }
     }
@@ -99,7 +100,7 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
                   <Table.Cell>
                     ${priceChecker(stock.symbol, stock.quantity, stockInfo)}
                   </Table.Cell>
-                  <Table.Cell>${currentValue.toFixed(2)}</Table.Cell>
+                  <Table.Cell>${currentValue}</Table.Cell>
                   <Table.Cell
                     selectable
                     textAlign="center"
@@ -137,7 +138,6 @@ const Portfolio = ({ stocks, apiKey, notes }) => {
       </div>
     </div>
   )
-  // }
 }
 
 export default Portfolio

@@ -22,11 +22,9 @@ function App() {
   const [users, setUsers] = useState()
   const [stocks, setStocks] = useState()
   const [notes, setNotes] = useState()
-  const [cpiData, setCpiData] = useState()
 
   const getAllUsers = async () => {
     let res = await axios.get(`${BASE_URL}/users`)
-    console.log(res.data)
     setUsers(res.data)
   }
 
@@ -36,7 +34,6 @@ function App() {
 
   const getAllStocks = async () => {
     let res = await axios.get(`${BASE_URL}/stocks`)
-    console.log(res.data)
     setStocks(res.data)
   }
 
@@ -46,25 +43,12 @@ function App() {
 
   const getAllNotes = async () => {
     let res = await axios.get(`${BASE_URL}/notes`)
-    console.log(res.data)
     setNotes(res.data)
   }
 
   useEffect(() => {
     getAllNotes()
   }, [])
-
-  // const getCpiData = async () => {
-  //   let res = await axios.get(
-  //     `https://www.alphavantage.co/query?function=CPI&interval=monthly&apikey=${API_KEY}`
-  //   )
-  //   console.log(res.data)
-  //   setCpiData(res.data)
-  // }
-
-  //  useEffect(() => {
-  //     getCpiData()
-  //   }, [])
 
   return (
     <div className="App">
