@@ -11,27 +11,16 @@ const News = () => {
     console.log(e.target.value)
     setSearchQuery(e.target.value)
   }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(searchQuery)
     let res = await axios.get(
       `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=${searchQuery}&topics=technology&apikey=${API_KEY2}`
     )
-    console.log(res.data.feed)
-    console.log(res.data.feed[0].source_domain)
     await setSearchResults(res.data.feed)
     setSearchQuery('')
   }
 
-  // const handleKeyPress = (e) => {
-  //   //it triggers by pressing the enter key
-  //   if (e.keyCode === 13) {
-  //     handleSubmit()
-  //   }
-  // }
-  // if (!searchData) {
-  //   return <h2> loading please wait</h2>
-  // } else {
   return (
     <div className="search-bar-container">
       <Grid>
@@ -45,8 +34,6 @@ const News = () => {
               placeholder="Search"
               onChange={handleChange}
               value={searchQuery}
-
-              // onKeyPress={handleKeyPress}
             />
             <Button type="submit">Search</Button>
           </Form>
@@ -85,7 +72,6 @@ const News = () => {
       ) : null}
     </div>
   )
-  // }
 }
 
 export default News
