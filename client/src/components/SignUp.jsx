@@ -1,9 +1,12 @@
 import { Button, Form, Segment, Grid } from 'semantic-ui-react'
 import { BASE_URL } from '../globals'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const SignUp = () => {
+  let navigate = useNavigate()
+
   const initialState = {
     firstName: '',
     lastName: '',
@@ -22,7 +25,7 @@ const SignUp = () => {
     event.preventDefault()
     let res = await axios.post(`${BASE_URL}/users`, formState)
     setFormState(initialState)
-    // navigate(`/riders/${res.data.id}`, { state: { rider: res.data } })
+    navigate(`/users/${res.data.id}`, { state: { user: res.data } })
   }
   return (
     <div className="main-container">

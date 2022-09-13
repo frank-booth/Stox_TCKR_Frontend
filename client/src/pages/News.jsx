@@ -1,4 +1,4 @@
-import { Segment, Grid, Form, Button, Header, Item } from 'semantic-ui-react'
+import { Segment, Grid, Form, Button, Item } from 'semantic-ui-react'
 import { useState } from 'react'
 import axios from 'axios'
 
