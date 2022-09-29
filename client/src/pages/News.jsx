@@ -56,7 +56,11 @@ const News = () => {
                         <Item.Description className="item-blue">
                           Summary: {article.summary}
                         </Item.Description>
-                        <Item.Description as="a" href={article.url}>
+                        <Item.Description
+                          as="a"
+                          href={article.url}
+                          target="blank"
+                        >
                           Article Link
                         </Item.Description>
                         <br />

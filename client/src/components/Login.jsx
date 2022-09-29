@@ -6,8 +6,8 @@ const Login = ({ users }) => {
   let navigate = useNavigate()
 
   const initialState = {
-    username: '',
-    passwordDigest: ''
+    username: 'jones',
+    passwordDigest: 'pw123'
   }
   const [formState, setFormState] = useState(initialState)
 
