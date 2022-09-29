@@ -20,18 +20,18 @@ const Nav = () => {
         <NavLink className="links" to="/">
           Home
         </NavLink>
-        <NavLink className="links" to="/economic_data">
+        {/* <NavLink className="links" to="/economic_data">
           Economic Data
-        </NavLink>
+        </NavLink> */}
         <NavLink className="links" to="/news">
           News
         </NavLink>
         <NavLink className="links" to="/login">
           Login
         </NavLink>
-        <NavLink className="links" to="/profile">
+        {/* <NavLink className="links" to="/profile">
           Profile
-        </NavLink>
+        </NavLink> */}
       </div>
     </div>
   )
